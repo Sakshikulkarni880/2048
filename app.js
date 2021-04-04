@@ -1,224 +1,246 @@
-document.addEventListener('DOMContentLoaded',() =>{
+document.addEventListener('DOMContentLoaded', () =>  {
     const gridDisplay = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const resultDisplay = document.getElementById('result')
-    const width = 4
     let squares = []
+    const width = 4
     let score = 0
-    const reloadtButton = document.querySelector(".retry-button");
-    
-    
-    
+
+    function clear() {
+        clearInterval(mainTimer)
+    }
+
     // Reload everything:
     function reload() {
         reload = location.reload();
     }
-    // Event listeners for reload
-    // reloadButton.addEventListener("click", reload, false);
-
-
-    //playng board
-    function createBoard(){
-        for(let i=0;i<width*width;i++){
-            let square = document.createElement('div')
-            square.innerHTML = 0
-            gridDisplay.appendChild(square)
-            squares.push(square)
-        }
-        generate()
+  
+    //playing board
+    function createBoard() {
+      for (let i=0; i < width*width; i++) {
+        square = document.createElement('div')
+        square.innerHTML = 0
+        gridDisplay.appendChild(square)
+        squares.push(square)
+      }
+      generate()
+      generate()
     }
     createBoard()
-
-    //generating a random number
-    function generate(){
-        let randomNumber = Math.floor(Math.random()*squares.length)
-
-        if (squares[randomNumber].innerHTML==0){
-            squares[randomNumber].innerHTML = 2
-        }
-        else{
-            generate()
-        }
+  
+    //generate a new number
+    function generate() {
+      randomNumber = Math.floor(Math.random() * squares.length)
+      if (squares[randomNumber].innerHTML == 0) {
+        squares[randomNumber].innerHTML = 2
+        checkForLoose()
+      } else generate()
     }
-
-    //swipe right
-    function moveRight(){
-        for(let i=0;i<width*width;i++){
-            if(i%4==0){
-                let TotalOne = squares[i].innerHTML
-                let TotalTwo = squares[i+1].innerHTML
-                let TotalThree = squares[i+2].innerHTML
-                let TotalFour = squares[i+3].innerHTML
-                let row = [parseInt(TotalOne),parseInt(TotalTwo),parseInt(TotalThree),parseInt(TotalFour)]
-
-                let filteredRow = row.filter(num => num)
-                
-                let missing = 4 - filteredRow.length
-                let zeroes = Array(missing).fill(0)
-                let newRow = zeroes.concat(filteredRow)
-
-                squares[i].innerHTML = newRow[0]
-                squares[i+1].innerHTML = newRow[1]
-                squares[i+2].innerHTML = newRow[2]
-                squares[i+3].innerHTML = newRow[3]
-            }
+  
+    function moveRight() {
+      for (let i=0; i < 16; i++) {
+        if (i % 4 === 0) {
+          let totalOne = squares[i].innerHTML
+          let totalTwo = squares[i+1].innerHTML
+          let totalThree = squares[i+2].innerHTML
+          let totalFour = squares[i+3].innerHTML
+          let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+  
+          let filteredRow = row.filter(num => num)
+          let missing = 4 - filteredRow.length
+          let zeros = Array(missing).fill(0)
+          let newRow = zeros.concat(filteredRow)
+  
+          squares[i].innerHTML = newRow[0]
+          squares[i +1].innerHTML = newRow[1]
+          squares[i +2].innerHTML = newRow[2]
+          squares[i +3].innerHTML = newRow[3]
         }
+      }
     }
-
-    //swipe left
-    function moveLeft(){
-        for(let i=0;i<width*width;i++){
-            if(i%4==0){
-                let TotalOne = squares[i].innerHTML
-                let TotalTwo = squares[i+1].innerHTML
-                let TotalThree = squares[i+2].innerHTML
-                let TotalFour = squares[i+3].innerHTML
-                let row = [parseInt(TotalOne),parseInt(TotalTwo),parseInt(TotalThree),parseInt(TotalFour)]
-
-                let filteredRow = row.filter(num => num)
-                
-                let missing = 4 - filteredRow.length
-                let zeroes = Array(missing).fill(0)
-                let newRow = filteredRow.concat(zeroes)
-
-                squares[i].innerHTML = newRow[0]
-                squares[i+1].innerHTML = newRow[1]
-                squares[i+2].innerHTML = newRow[2]
-                squares[i+3].innerHTML = newRow[3]
-            }
+  
+    function moveLeft() {
+      for (let i=0; i < 16; i++) {
+        if (i % 4 === 0) {
+          let totalOne = squares[i].innerHTML
+          let totalTwo = squares[i+1].innerHTML
+          let totalThree = squares[i+2].innerHTML
+          let totalFour = squares[i+3].innerHTML
+          let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+  
+          let filteredRow = row.filter(num => num)
+          let missing = 4 - filteredRow.length
+          let zeros = Array(missing).fill(0)
+          let newRow = filteredRow.concat(zeros)
+  
+          squares[i].innerHTML = newRow[0]
+          squares[i +1].innerHTML = newRow[1]
+          squares[i +2].innerHTML = newRow[2]
+          squares[i +3].innerHTML = newRow[3]
         }
+      }
     }
-
-    function CombineRow(){
-        for(let i=0;i<15;i++){
-            if(squares[i].innerHTML===squares[i+1].innerHTML){
-                let combinedTotal = parseInt(parseInt(squares[i].innerHTML)+parseInt(squares[i+1].innerHTML))
-                squares[i+1].innerHTML = combinedTotal
-                squares[i].innerHTML =0
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
-            }
-        }
-        checkForWin()
+  
+  
+    function moveUp() {
+      for (let i=0; i < 4; i++) {
+        let totalOne = squares[i].innerHTML
+        let totalTwo = squares[i+width].innerHTML
+        let totalThree = squares[i+(width*2)].innerHTML
+        let totalFour = squares[i+(width*3)].innerHTML
+        let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+  
+        let filteredColumn = column.filter(num => num)
+        let missing = 4 - filteredColumn.length
+        let zeros = Array(missing).fill(0)
+        let newColumn = filteredColumn.concat(zeros)
+  
+        squares[i].innerHTML = newColumn[0]
+        squares[i +width].innerHTML = newColumn[1]
+        squares[i+(width*2)].innerHTML = newColumn[2]
+        squares[i+(width*3)].innerHTML = newColumn[3]
+      }
     }
-
-    function Combinecolumn(){
-        for(let i=0;i<12;i++){
-            if(squares[i].innerHTML===squares[i+width].innerHTML){
-                let combinedTotal = parseInt(parseInt(squares[i].innerHTML)+parseInt(squares[i+width].innerHTML))
-                squares[i+width].innerHTML = 0
-                squares[i].innerHTML = combinedTotal
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
-            }
-        }
+  
+    function moveDown() {
+      for (let i=0; i < 4; i++) {
+        let totalOne = squares[i].innerHTML
+        let totalTwo = squares[i+width].innerHTML
+        let totalThree = squares[i+(width*2)].innerHTML
+        let totalFour = squares[i+(width*3)].innerHTML
+        let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+  
+        let filteredColumn = column.filter(num => num)
+        let missing = 4 - filteredColumn.length
+        let zeros = Array(missing).fill(0)
+        let newColumn = zeros.concat(filteredColumn)
+  
+        squares[i].innerHTML = newColumn[0]
+        squares[i +width].innerHTML = newColumn[1]
+        squares[i+(width*2)].innerHTML = newColumn[2]
+        squares[i+(width*3)].innerHTML = newColumn[3]
+      }
     }
-
-    //keycodes
-    function control(e){
-        if(e.keyCode === 39){
-            keyRight()
-        }
-        else if(e.keyCode===37){
-            keyLeft()
-        }
-        else if(e.keyCode===38){
-            keyUp()
-        }
-        else if(e.keyCode===40){
-            keyDown()
-        }
+  
+     //keyCodes
+    function control(e) {
+      if(e.keyCode === 37) {
+        keyLeft()
+      } else if (e.keyCode === 38) {
+        keyUp()
+      } else if (e.keyCode === 39) {
+        keyRight()
+      } else if (e.keyCode === 40) {
+        keyDown()
+      }
     }
-    document.addEventListener('keyup',control)
-
+    document.addEventListener('keyup', control)
+  
     function keyRight() {
-        moveRight()
-        CombineRow()
-        moveRight()
-        generate()
+      moveRight()
+      combineRow()
+      moveRight()
+      generate()
     }
-
+  
     function keyLeft() {
-        moveLeft()
-        CombineRow()
-        moveLeft()
-        generate()
+      moveLeft()
+      combineRow()
+      moveLeft()
+      generate()
     }
-
+  
     function keyUp() {
-        moveUp()
-        Combinecolumn()
-        moveUp()
-        generate()
+      moveUp()
+      combineColumn()
+      moveUp()
+      generate()
     }
-
+  
     function keyDown() {
-        moveDown()
-        CombineRow()
-        moveDown()
-        generate()
+      moveDown()
+      combineColumn()
+      moveDown()
+      generate()
     }
 
-    function moveDown(){
-        for(let i=0; i<4; i++){
-            let TotalOne = squares[i].innerHTML
-            let TotalTwo = squares[i+width].innerHTML
-            let TotalThree = squares[i+width*2].innerHTML
-            let TotalFour = squares[i+width*3].innerHTML
-            let column = [parseInt(TotalOne),parseInt(TotalTwo),parseInt(TotalThree),parseInt(TotalFour)]
 
-            let filteredColumn = column.filter(num => num)
-                
-            let missing = 4 - filteredColumn.length
-            let zeroes = Array(missing).fill(0)
-            let newColumn = zeroes.concat(filteredColumn)
 
-            squares[i].innerHTML = newColumn[0]
-            squares[i+width].innerHTML = newColumn[1]
-            squares[i+width*2].innerHTML = newColumn[2]
-            squares[i+width*3].innerHTML = newColumn[3]
+    function combineRow() {
+      for (let i =0; i < 15; i++) {
+        if (squares[i].innerHTML === squares[i +1].innerHTML) {
+          let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i +1].innerHTML)
+          squares[i].innerHTML = combinedTotal
+          squares[i +1].innerHTML = 0
+          score += combinedTotal
+          scoreDisplay.innerHTML = score
         }
+      }
+      checkForWin()
     }
-
-    function moveUp(){
-        for(let i=0; i<4; i++){
-            let TotalOne = squares[i].innerHTML
-            let TotalTwo = squares[i+width].innerHTML
-            let TotalThree = squares[i+width*2].innerHTML
-            let TotalFour = squares[i+width*3].innerHTML
-            let column = [parseInt(TotalOne),parseInt(TotalTwo),parseInt(TotalThree),parseInt(TotalFour)]
-
-            let filteredColumn = column.filter(num => num)
-                
-            let missing = 4 - filteredColumn.length
-            let zeroes = Array(missing).fill(0)
-            let newColumn = filteredColumn.concat(zeroes)
-
-            squares[i].innerHTML = newColumn[0]
-            squares[i+width].innerHTML = newColumn[1]
-            squares[i+width*2].innerHTML = newColumn[2]
-            squares[i+width*3].innerHTML = newColumn[3]
+  
+    function combineColumn() {
+      for (let i =0; i < 12; i++) {
+        if (squares[i].innerHTML === squares[i +width].innerHTML) {
+          let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i +width].innerHTML)
+          squares[i].innerHTML = combinedTotal
+          squares[i +width].innerHTML = 0
+          score += combinedTotal
+          scoreDisplay.innerHTML = score
         }
+      }
+      checkForWin()
     }
-
-    function checkForWin(){
-        for(let i=0;i<squares.length;i++){
-            if(squares[i]=="2048"){
-                resultDisplay = 'You Win :)'
-                document.removeEventListener('keyup',control)
-            }
+  
+   
+  
+    //win
+    function checkForWin() {
+      for (let i=0; i < squares.length; i++) {
+        if (squares[i].innerHTML == 2048) {
+          resultDisplay.innerHTML = 'You WIN'
+          document.removeEventListener('keyup', control)
+          setTimeout(() => clear(), 3000)
         }
+      }
     }
-    function checkForLoose(){
-        let zeros = 0
-        for(let i=0;i<squares.length;i++){
-            if(squares[i]==''){
-                zeros++
-            }
+  
+    //loose
+    function checkForLoose() {
+      let zeros = 0
+      for (let i=0; i < squares.length; i++) {
+        if (squares[i].innerHTML == 0) {
+          zeros++
         }
-        if(zeros === 0){
-            resultDisplay='You Loose :('
-            document.removeEventListener('keyup',control)
-        }
+      }
+      if (zeros === 0) {
+        resultDisplay.innerHTML = 'You LOSE'
+        document.removeEventListener('keyup', control)
+        setTimeout(() => clear(), 3000)
+      }
     }
-})
+  
+    
+    
+  
+//colours
+function changeColours() {
+  for (let i=0; i < squares.length; i++) {
+    if (squares[i].innerHTML == 0) squares[i].style.backgroundColor = '#afa192'
+    else if (squares[i].innerHTML == 2) squares[i].style.backgroundColor = '#eee4da'
+    else if (squares[i].innerHTML  == 4) squares[i].style.backgroundColor = '#ede0c8' 
+    else if (squares[i].innerHTML  == 8) squares[i].style.backgroundColor = '#f2b179' 
+    else if (squares[i].innerHTML  == 16) squares[i].style.backgroundColor = '#ffcea4' 
+    else if (squares[i].innerHTML  == 32) squares[i].style.backgroundColor = '#e8c064' 
+    else if (squares[i].innerHTML == 64) squares[i].style.backgroundColor = '#ffab6e' 
+    else if (squares[i].innerHTML == 128) squares[i].style.backgroundColor = '#fd9982' 
+    else if (squares[i].innerHTML == 256) squares[i].style.backgroundColor = '#ead79c' 
+    else if (squares[i].innerHTML == 512) squares[i].style.backgroundColor = '#76daff' 
+    else if (squares[i].innerHTML == 1024) squares[i].style.backgroundColor = '#beeaa5' 
+    else if (squares[i].innerHTML == 2048) squares[i].style.backgroundColor = '#d7d4f0' 
+    }
+  }
+  changeColours()
+  var mainTimer = setInterval(changeColours, 100)
+  
+  })

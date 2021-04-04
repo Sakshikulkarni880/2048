@@ -7,40 +7,27 @@
     <title>2048</title>
     <link rel = "icon" href = "2048_logo.png" type = "image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="app.js" charset="utf-8"></script>
 </head>
 <body>
     
-    <div class="container">
-        <div class="heading">
-          <h1 class="title">2048</h1>
+  <div class="container">
+    <div class="info">
+      <h1>2048</h1>
+      <!-- <a onClick="window.location.reload();" class="retry-button score-container-1">Try again</a> -->
+      <button class="btn btn-primary score-container-1"><a onClick="window.location.reload();" class="glyphicon glyphicon-refresh  retry-button ">Try Again</a></button>
+      <div class="score-container">
+        <div class="score-title">score</div>
+        <span id="score">0</span>
+      </div>
+    </div>
+    <span id="result">Join the numbers and get to the <b>2048</b> tile!</span>
+    <div class="grid"></div>
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong><br>> Use your <strong>arrow keys</strong> to move the tiles.<br>> When 2 same number tiles touch, they <strong>merge into one!</strong>
+    </p>
+  </div>
+  
 
-        </div>
-        <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-        <div class="score-title container1">Score:
-          <span id="score">0</span>
-      </div>
-        
-      
-      <div class="game-container">
-          <div class="game-message">
-            <p></p>
-            <div class="lower">
-              <a onClick="window.location.reload();" class="retry-button">Try again</a>
-            </div>
-          </div>
-      
-          <div class="tile-container" id="result">
-            <div class="grid"></div>
-          </div>
-        </div>
-        <p class="game-explanation">
-          <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-        </p>
-        <hr>
-      </div>
 </body>
 </html>
