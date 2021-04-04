@@ -27,7 +27,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     width: 456px;
-    height: 70vmin;
+    height: 456px;
     background-color: #BBADA0;
     border: 7px solid #BBADA0;
     border-radius: 6px;
