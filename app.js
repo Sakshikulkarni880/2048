@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     const gridDisplay = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const resultDisplay = document.getElementById('result')
+    
     let squares = []
     const width = 4
     let score = 0
@@ -121,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () =>  {
         squares[i+(width*3)].innerHTML = newColumn[3]
       }
     }
-  
+    
+    
      //keyCodes
     function control(e) {
       if(e.keyCode === 37) {
