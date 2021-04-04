@@ -35,8 +35,8 @@ h1 {
 }
   
 .grid div {
-    width: 15.1vmin;
-    height: 15vmin;
+    width: 100px;
+    height: 100px;
     margin: 7px;
     border-radius: 3px;
     background-color: #EEE4DA;
