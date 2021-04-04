@@ -1,0 +1,47 @@
+body{
+    padding-left: 20%;
+}
+.grid{
+    width: 75vmin;
+    height: 75vmin;
+    background-color: #AAACAB;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+.grid div{
+    margin: 0.7vmin 0.7vmin 0.7vmin 0.7vmin;
+    width: 15vmin;
+    height: 15vmin;
+    background-color: #C5C6BE;
+    border-radius: 0.5rem;
+    font-size: 8rem;
+    text-align: center;
+    margin-left: 2.5vmin;
+    margin-top: 2vmin;
+    align-content: center;
+}
+.container1{
+    display: inline;
+    width: 20vmin;
+    height: 10vmin;
+    background-color: #AAACAB;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.title{
+    display: inline;
+    font-weight: bold;
+    font-size: 10vmin;
+}
+
+
+
+
+
+
+
