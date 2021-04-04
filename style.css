@@ -69,6 +69,14 @@ h1 {
 .score-title {
     font-size: 16px;
   }
+
+.button{
+    width: 100px;
+    margin: 5px;
+    margin-right: 5px;
+    color: #8f7a66 ;
+    border: none;
+}
 @media (max-width:600px){
     h1{
         font-size: 50px;
