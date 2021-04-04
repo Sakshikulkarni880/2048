@@ -26,7 +26,7 @@ h1 {
 .grid{
     display: flex;
     flex-wrap: wrap;
-    width: 68vmin;
+    width: 456px;
     height: 70vmin;
     background-color: #BBADA0;
     border: 7px solid #BBADA0;
