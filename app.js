@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded',() =>{
     const width = 4
     let squares = []
     let score = 0
+    const reloadtButton = document.querySelector(".retry-button");
+    
+    
+    
+    // Reload everything:
+    function reload() {
+        reload = location.reload();
+    }
+    // Event listeners for reload
+    // reloadButton.addEventListener("click", reload, false);
 
 
     //playng board
