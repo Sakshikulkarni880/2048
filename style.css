@@ -69,3 +69,18 @@ h1 {
 .score-title {
     font-size: 16px;
   }
+@media (max-width:600px){
+    h1{
+        font-size: 50px;
+    }
+
+    .grid{
+        width: 356px;
+        height: 356px;
+    }
+    .grid div{
+        width: 75px;
+        height: 75px;
+    }
+
+}
