@@ -96,7 +96,7 @@ h1 {
     }
 }
 
-@media(max-width:450px){
+/* @media(max-width:450px){
     h1{
         font-size: 30px;
     }
@@ -113,9 +113,9 @@ h1 {
     .button{
         width: 50px;
     }
-}
+} */
 
-@media(max-width:300px){
+@media(max-width:400px){
     h1{
         font-size: 20px;
     }
