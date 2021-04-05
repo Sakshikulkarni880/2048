@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () =>  {
         checkForLoose()
       } else generate()
     }
+
+    document.getElementById("btn-u").addEventListener('click', keyUp)
+    document.getElementById("btn-d").addEventListener('click', keyDown)
+    document.getElementById("btn-l").addEventListener('click', keyLeft)
+    document.getElementById("btn-r").addEventListener('click', keyRight)
   
     function moveRight() {
       for (let i=0; i < 16; i++) {
