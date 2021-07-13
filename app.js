@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     const gridDisplay = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const resultDisplay = document.getElementById('result')
+    var hammertime = new Hammer(myElement);
     
     let squares = []
     const width = 4
@@ -42,7 +43,26 @@ document.addEventListener('DOMContentLoaded', () =>  {
     document.getElementById("btn-d").addEventListener('click', keyDown)
     document.getElementById("btn-l").addEventListener('click', keyLeft)
     document.getElementById("btn-r").addEventListener('click', keyRight)
-  
+    
+    
+    hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+    hammertime.on('swipeleft', function(ev) {
+    control(37);
+    });
+
+    hammertime.on('swiperight', function(ev) {
+    control(39);
+    });
+
+    hammertime.on('swipeup', function(ev) {
+    control(38);
+    });
+
+    hammertime.on('swipedown', function(ev) {
+    control(40);
+    });
+    
     function moveRight() {
       for (let i=0; i < 16; i++) {
         if (i % 4 === 0) {
