@@ -45,23 +45,23 @@ document.addEventListener('DOMContentLoaded', () =>  {
     document.getElementById("btn-r").addEventListener('click', keyRight)
     
     
-    hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+//     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-    hammertime.on('swipeleft', function(ev) {
-    control(37);
-    });
+//     hammertime.on('swipeleft', function(ev) {
+//     control(37);
+//     });
 
-    hammertime.on('swiperight', function(ev) {
-    control(39);
-    });
+//     hammertime.on('swiperight', function(ev) {
+//     control(39);
+//     });
 
-    hammertime.on('swipeup', function(ev) {
-    control(38);
-    });
+//     hammertime.on('swipeup', function(ev) {
+//     control(38);
+//     });
 
-    hammertime.on('swipedown', function(ev) {
-    control(40);
-    });
+//     hammertime.on('swipedown', function(ev) {
+//     control(40);
+//     });
     
     function moveRight() {
       for (let i=0; i < 16; i++) {
