@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     const gridDisplay = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const resultDisplay = document.getElementById('result')
-    var hammertime = new Hammer(myElement);
+//     var hammertime = new Hammer(myElement);
     
     let squares = []
     const width = 4
