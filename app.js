@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     function checkForWin() {
       for (let i=0; i < squares.length; i++) {
         if (squares[i].innerHTML == 2048) {
-          resultDisplay.innerHTML = 'You WIN'
+          resultDisplay.innerHTML = 'You WIN!!!'
           document.removeEventListener('keyup', control)
           setTimeout(() => clear(), 3000)
         }
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
         }
       }
       if (zeros === 0) {
-        resultDisplay.innerHTML = 'You LOSE'
+        resultDisplay.innerHTML = 'You LOSE!!!'
         document.removeEventListener('keyup', control)
         setTimeout(() => clear(), 3000)
       }
